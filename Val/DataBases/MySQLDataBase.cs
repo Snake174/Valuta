@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using Interfaces;
 using Models;
 using MySql.Data.MySqlClient;
@@ -106,10 +107,12 @@ namespace DataBases
 
                 string sql = "SELECT value FROM val_curse WHERE id_val = @idVal AND date = @date";
 
-                MySqlCommand cmd = new MySqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@idVal", val);
-                cmd.Parameters.AddWithValue("@date", date);
-                cmd.Prepare();
+                MySqlCommand cmd = new MySqlCommand("GET_VAL_CURSE", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("val", val));
+                cmd.Parameters.Add(new MySqlParameter("dt", date));
+                cmd.Parameters.Add("@ireturnvalue", MySqlDbType.Decimal);
+                cmd.Parameters["@ireturnvalue"].Direction = ParameterDirection.ReturnValue;
                 object res = cmd.ExecuteScalar();
 
                 con.Close();
