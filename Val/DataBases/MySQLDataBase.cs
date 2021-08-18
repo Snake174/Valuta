@@ -105,8 +105,6 @@ namespace DataBases
             {
                 con.Open();
 
-                string sql = "SELECT value FROM val_curse WHERE id_val = @idVal AND date = @date";
-
                 MySqlCommand cmd = new MySqlCommand("GET_VAL_CURSE", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new MySqlParameter("val", val));

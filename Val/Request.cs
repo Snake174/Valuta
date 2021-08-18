@@ -33,7 +33,6 @@ namespace Val
             WebRequest request = WebRequest.Create(URL);
             request.Method = "POST";
 
-            //string postData = "";
             byte[] byteArray = Encoding.UTF8.GetBytes("");
 
             request.ContentType = ContentType;
